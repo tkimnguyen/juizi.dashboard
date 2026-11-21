@@ -18,7 +18,7 @@ jobs:
       npm-tag: ${{ steps.versions.outputs.npm-tag }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.4.0
       - name: Tag matches both package versions
         id: versions
         env:
@@ -52,7 +52,7 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.4.0
       - run: uv build
       - run: uvx twine check dist/*
       - run: uv publish --trusted-publishing always

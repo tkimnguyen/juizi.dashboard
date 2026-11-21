@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.4.0
       # Rules live in ruff.toml: real errors only, no style or formatting.
       - run: uvx ruff@0.11.13 check src
 
@@ -20,7 +20,7 @@ jobs:
       PLONE_VERSION: "6.1.5"
     steps:
       - uses: actions/checkout@v7
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.4.0
       - name: Install Plone and this package
         run: |
           uv venv --python 3.12 .venv
