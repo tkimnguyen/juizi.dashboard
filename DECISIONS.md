@@ -491,3 +491,21 @@ matters more than a complete trail.
 
 **Raised in the security review, 2026-10-11, and built at the user's
 request.**
+
+## D28. Released from the fork, with trusted publishing
+
+`juizi.dashboard` is on PyPI and `volto-juizi-dashboard` on npm. Both are
+published by a GitHub Actions workflow in the tkimnguyen fork when a
+GitHub Release is published there (RELEASING.md):
+- no tokens are stored: PyPI and npm trust that workflow (OIDC);
+- each publish waits for the maintainer's approval;
+- npm versions carry provenance, linking each one to the run that built
+  it, so npm's `repository.url` names the fork;
+- publishing npm by hand needs two-factor authentication, and tokens
+  can't publish.
+
+*Trade-off:* the fork, not juizi-com, is the source of releases, and npm
+links to the fork. Moving publishing to juizi-com later means repeating
+the registry and environment setup there.
+
+**Decided 2026-11-21, at the user's request.**
