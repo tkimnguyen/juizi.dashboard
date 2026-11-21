@@ -8,7 +8,7 @@
   "author": "Juizi",
   "repository": {
     "type": "git",
-    "url": "https://github.com/juizi-com/juizi.dashboard"
+    "url": "git+https://github.com/tkimnguyen/juizi.dashboard.git"
   },
   "peerDependencies": {
     "react": "^18.2.0",
