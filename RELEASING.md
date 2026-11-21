@@ -31,6 +31,22 @@ are stored anywhere: PyPI and npm both trust that workflow directly
    `pypi` and `npm`.
 5. Check both registries. npm can take a few minutes to show a new
    version after the workflow says `+ volto-juizi-dashboard@…`.
+6. Update the README's **Try it** sites: they use Plone in a Box's
+   frontend image `ghcr.io/collective/plone-in-a-box-frontend:19-juizi-dashboard`,
+   which is built from pinned versions. In
+   [tkimnguyen/plone-in-a-box](https://github.com/tkimnguyen/plone-in-a-box),
+   open a PR that sets the new versions in the `juizi-dashboard` entry of
+   `.github/workflows/frontend-images.yml`:
+
+       packages: "volto-juizi-dashboard@1.0.0-beta.3"
+       backend_addons: "juizi.dashboard==1.0.0b3"
+
+   Once it's merged, the workflow rebuilds the image under the same name,
+   and new Try it servers get the new release. Sync it to
+   collective/plone-in-a-box as that repo's RELEASING.md describes, since
+   the published image is built there. Nothing else changes: the Linode
+   StackScript (2318969), the AWS link and the startup lines all name the
+   image, not a version.
 
 ### What the workflow does
 
