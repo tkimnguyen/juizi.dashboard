@@ -129,3 +129,5 @@ Global role changes made in Volto's Users screen *are* recorded.
 
 Browser scenarios run on the payments test bench: `make -C e2e dashboard`,
 on the `dashboard-test` site with the frontend on :3004.
+
+Releases to PyPI and npm: see [RELEASING.md](RELEASING.md).
