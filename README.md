@@ -1,5 +1,8 @@
 # juizi.dashboard
 
+[![PyPI](https://img.shields.io/pypi/v/juizi.dashboard?label=PyPI)](https://pypi.org/project/juizi.dashboard/)
+[![npm (beta)](https://img.shields.io/npm/v/volto-juizi-dashboard/beta?label=npm%20beta)](https://www.npmjs.com/package/volto-juizi-dashboard)
+
 An activity record for Plone 6 sites, and a dashboard in Volto's Site Setup
 that shows site administrators what happened: content actions and people's
 account activity in one list, filtered by date range, with a CSV download.
