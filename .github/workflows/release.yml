@@ -1,0 +1,79 @@
+name: Release
+
+# Publishing a GitHub Release (tag vX.Y.Z, e.g. v1.0.0b1) builds both
+# packages and publishes juizi.dashboard to PyPI and volto-juizi-dashboard
+# to npm. Both use trusted publishing (OIDC), so no tokens are stored here.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      npm-tag: ${{ steps.versions.outputs.npm-tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Tag matches both package versions
+        id: versions
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          uv run --no-project --with packaging python - <<'EOF'
+          import json, os, re
+          from packaging.version import Version
+
+          tag = Version(os.environ["TAG"].removeprefix("v"))
+          init = open("src/juizi/dashboard/__init__.py").read()
+          py = Version(re.search(r'__version__ = "([^"]+)"', init)[1])
+          npm = json.load(open("frontend/package.json"))["version"]
+          print(f"tag {tag}, Python {py}, npm {npm}")
+          # PEP 440 reads npm's 1.0.0-beta.1 as 1.0.0b1.
+          assert py == tag, "Python version doesn't match the tag"
+          assert Version(npm) == tag, "npm version doesn't match the tag"
+          assert not tag.is_devrelease, "dev versions aren't published"
+          npm_tag = "beta" if tag.is_prerelease else "latest"
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"npm-tag={npm_tag}\n")
+          EOF
+
+  pypi:
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/juizi.dashboard/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build
+      - run: uvx twine check dist/*
+      - run: uv publish --trusted-publishing always
+
+  npm:
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/volto-juizi-dashboard
+    permissions:
+      id-token: write
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or later.
+      - run: npm install -g npm@11.6.2
+      - run: npm publish --provenance --tag ${{ needs.check.outputs.npm-tag }}
