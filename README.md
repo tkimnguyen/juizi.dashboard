@@ -72,9 +72,20 @@ run `sudo cat /root/plone-credentials.txt`. Log in, and open Site Setup →
 4. Open Site Setup → **Activity**. Its settings (recording on or off, IP
    addresses, comment text) are under Site Setup → Activity record settings.
 
-Who can see it: Manager and Site Administrator, through the permissions
-"juizi.dashboard: View site activity" and "juizi.dashboard: Manage activity
-record settings".
+Who can see it:
+- **Manager and Site Administrator** see the dashboard and can change its
+  settings.
+- **Site Activity Viewer**, a role this add-on adds, sees the dashboard and
+  nothing else: no settings, no Site Setup, no editing. Give it in Site
+  Setup → Users to someone who should see what happened without being an
+  administrator, such as an auditor, or a demo login. They open the dashboard
+  from **Activity** in their user menu (the toolbar's person icon), and can
+  hold it alongside other roles, such as Editor.
+
+The permissions are "juizi.dashboard: View site activity" (all three roles)
+and "juizi.dashboard: Manage activity record settings" (Manager and Site
+Administrator). Uninstalling removes the Site Activity Viewer role and
+everyone's assignments of it.
 
 ## Uninstalling
 
