@@ -24,8 +24,11 @@ It needs the backend package too: this screen only shows what
 The [main README](https://github.com/tkimnguyen/juizi.dashboard#readme) has
 the details, including uninstalling and the server script.
 
-**Site Setup → Activity** (`/controlpanel/activity`) is for Manager and Site
-Administrator. It shows one list of what happened on the site, newest first:
+**Site Setup → Activity** (`/controlpanel/activity`) is for Manager, Site
+Administrator and Site Activity Viewer, a role the backend adds for people
+who should see the dashboard and nothing else. They reach it from
+**Activity** in the toolbar's user menu, since they can't open Site Setup,
+and don't see the links to the settings. It shows one list of what happened on the site, newest first:
 
 - **Columns:** type (Content, People, Record), when, who (with the IP
   address for account events, if the site records it), what, and details:
