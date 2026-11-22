@@ -102,3 +102,6 @@ Recorded so it can be checked or recreated.
 - **1.0.0b2** (2026-11-21): the first release where the workflow
   published both. npm's `latest` tag was then moved by hand from
   `1.0.0-beta.1` to `1.0.0-beta.2`.
+- **1.0.0b3** (2026-11-22): the Site Activity Viewer role (D29). Both
+  published by the workflow; npm's `latest` tag moved by hand to
+  `1.0.0-beta.3`.
