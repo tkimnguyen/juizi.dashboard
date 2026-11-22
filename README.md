@@ -47,11 +47,30 @@ when you're done, which deletes the site too.
       export DEMO_USER='demo'
       curl -fsSL --retry 10 --retry-all-errors -o /root/plone-in-a-box.sh https://raw.githubusercontent.com/tkimnguyen/plone-in-a-box/2.13/src/StackScript && bash /root/plone-in-a-box.sh
 
-Then open the server's IP address in a browser to watch setup. The admin and
-demo passwords are in `/root/plone-credentials.txt` on the server: open the
-provider's browser console (Linode's **Launch LISH Console**, for example) and
-run `sudo cat /root/plone-credentials.txt`. Log in, and open Site Setup →
-**Activity**. Juizi Dashboard is already installed on the site.
+Then open the server's IP address in a browser to watch setup. When the site
+appears, log in with the demo login:
+
+1. **Username:** `demo`.
+2. **Password:** setup makes up a random one, and it isn't shown anywhere on
+   the website. It's saved on the server: open your provider's browser
+   console (Linode's **Launch LISH Console**, DigitalOcean's **Access →
+   Launch Droplet Console**, AWS's **Connect → EC2 Instance Connect**, or
+   Hetzner's **>_ Console**) and run:
+
+       sudo cat /root/plone-credentials.txt
+
+   Its demo line has the username, then the password after the `/`:
+
+       Demo login: demo / 7Gq2v8xRmT4pLwZs9KcN (Site Administrator)
+
+   The same file has the `admin` password: the one you set when creating
+   the server, or a generated one if you left it empty.
+3. Click **Log in** on the site, enter `demo` and that password, and open
+   Site Setup → **Activity**. Juizi Dashboard is already installed.
+
+Give the demo username and password to the people you want to try it. They
+can do anything a Site Administrator can on that site, so share them only
+with people you trust, and delete the server when you're done.
 
 ## Installing
 
