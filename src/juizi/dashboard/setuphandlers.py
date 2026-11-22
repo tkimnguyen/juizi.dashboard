@@ -66,6 +66,8 @@ def remove_viewer_role(site):
 
 
 def upgrade_1001(setup_tool):
-    """The Site Activity Viewer role and the user-menu entry (D29)."""
-    setup_tool.runImportStepFromProfile('profile-' + DEFAULT_PROFILE, 'rolemap')
-    setup_tool.runImportStepFromProfile('profile-' + DEFAULT_PROFILE, 'actions')
+    """The Site Activity Viewer role and the user-menu entry (D29). Only
+    these two steps, not the ones they depend on."""
+    for step in ('rolemap', 'actions'):
+        setup_tool.runImportStepFromProfile(
+            'profile-' + DEFAULT_PROFILE, step, run_dependencies=False)

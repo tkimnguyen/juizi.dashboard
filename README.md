@@ -29,7 +29,9 @@ cloud account. A small server costs a few cents an hour; delete it when
 you're done.
 
 1. Click a button and sign in. Fill in an admin password and a **Demo login
-   password** (each at least 12 characters), and create the server.
+   password** (each at least 12 characters), and create the server. The site
+   has no domain, so it uses plain HTTP and passwords cross the network
+   unencrypted: choose ones you don't use anywhere else.
 2. Open the server's address. When the site appears, log in as `demo` with
    your demo password, and open **Activity** in the user menu.
 
@@ -72,8 +74,10 @@ isn't shown anywhere on the website. Either:
 - **or set a new one as admin:** log in as `admin`, open Site Setup →
   **Users**, click `demo`, and change its password.
 
-The dashboard also shows everyone's logins on the demo site, so share the
-demo login only with people you trust.
+The dashboard also shows everyone's logins on the demo site, the admin's
+included, with their full IP addresses (the default; change it under Site
+Setup → Activity record settings). Share the demo login only with people you
+trust.
 
 </details>
 
